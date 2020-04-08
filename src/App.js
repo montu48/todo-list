@@ -1,30 +1,36 @@
 import React, { Component } from "react";
-import { v1 } from "uuid";
+import { v4 as uuidv4 } from 'uuid';
 import "bootstrap/dist/css/bootstrap.min.css";
 import TodoInput from "./components/TodoInput";
 import TodoList from "./components/ToDoList";
 
 class App extends Component {
   state = {
-    items: [
-      {
-        id: 1,
-        title: "Wake Up",
-      },
-      {
-        id: 2,
-        title: "Make Breakfast",
-      },
-    ],
-    id: v1(),
+    items: [],
+    id: uuidv4(),
+    item:"",
     editItem: false,
   };
   handleChange = (e) => {
-    console.log("handleChange");
+    this.setState({
+      item:e.target.value
+    })
   };
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log("handleSubmit");
+    const newItem = {
+      id:this.state.id,
+      title:this.state.item
+    }
+    const updateItem = [...this.state.items,newItem];
+    this.setState({
+      items:updateItem,
+      id:uuidv4(),
+      title:'',
+      item:'',
+      editItem:false
+    },() => console.log(this.state)
+    )
   };
   clearList = () => {
     console.log("Clear List");
@@ -36,6 +42,7 @@ class App extends Component {
     console.log(id);
   };
   render() {
+    
     return (
       <div className="App">
         <div className="container">
