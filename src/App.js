@@ -20,10 +20,11 @@ class App extends Component {
     editItem: false,
   };
   handleChange = (e) => {
-    console.log("Test");
+    console.log("handleChange");
   };
   handleSubmit = (e) => {
-    console.log("Test2");
+    e.preventDefault()
+    console.log("handleSubmit");
   };
   clearList = () => {
     console.log("Clear List");
